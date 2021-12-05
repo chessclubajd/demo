@@ -1,8 +1,6 @@
 package com.example.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Address {
@@ -20,6 +18,9 @@ public class Address {
     private String zipPlusFour;
     private String county;
     private String country;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    private Employee employeeName;
 
     public Long getId() {
         return id;
@@ -61,8 +62,8 @@ public class Address {
         return country;
     }
 
-    public Address(Long id, String addressLine1, String addressLine2, String apartmentNumber, String city, String state, String zipCode, String zipPlusFour, String county, String country) {
-        this.id = id;
+    public Address(String addressLine1, String addressLine2, String apartmentNumber, String city, String state, String zipCode, String zipPlusFour, String county, String country, Employee employeeName) {
+        this.employeeName = employeeName;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.apartmentNumber = apartmentNumber;
@@ -72,5 +73,8 @@ public class Address {
         this.zipPlusFour = zipPlusFour;
         this.county = county;
         this.country = country;
+    }
+
+    public Address() {
     }
 }

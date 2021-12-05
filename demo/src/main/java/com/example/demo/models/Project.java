@@ -2,23 +2,23 @@ package com.example.demo.models;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Project {
 
     @Id
     @GeneratedValue
-
     private Long id;
     private String projectName;
-    private
 
-    public Project(String projectName) {
+    @ManyToOne
+    private EmployeeProject employeeProject;
+
+    public Project(String projectName, EmployeeProject employeeProject) {
 
         this.projectName = projectName;
+        this.employeeProject = employeeProject;
     }
 
     public Long getId() {
